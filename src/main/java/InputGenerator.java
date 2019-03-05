@@ -4,13 +4,13 @@ import java.util.ArrayList;
 //        min input (1,151.0,1.0,71.0) = output:1897
 //        max input (3,200.0,50.0,90.0) = output:4030
 
-public class InputRange {
+public class InputGenerator {
     private Integer[] staffType = new Integer[3];
     private Integer[] workHour = new Integer[50];
     private Integer[] exHour = new Integer[50];
     private Integer[] quality = new Integer[20];
     ArrayList<ArrayList<Integer>> aList = new ArrayList<>();
-    ArrayList<Integer> row = new ArrayList<Integer>();
+    ArrayList<Integer> row = new ArrayList<>();
 
     public ArrayList<ArrayList<Integer>> setInputData() {
 
