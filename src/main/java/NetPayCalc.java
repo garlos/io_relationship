@@ -16,7 +16,7 @@ public class NetPayCalc {
         Double exPay = 0.0;
         Double netPay;
         Double grossPay;
-        Boolean retirement;
+        Boolean exReward;
 
         switch (staffType) {
             case 1:
@@ -32,23 +32,23 @@ public class NetPayCalc {
 
         netPay = (hours * (STANDARD * rate)) + (exHours * (rate * (STANDARD * 2)));
 
-        if ((exHours >= 25) && (workQuality >= 90)) {
+        if ((hours>180) && (exHours >= 25)) {
             exPay += (exHours - 25) * (STANDARD * rate);     //reward
-        } else if ((exHours >= 20) || (workQuality >= 80)) {
+        } else if ((exHours >= 20) ) {
             netPay += 200;
         }
         netPay += exPay;
 
         grossPay = Math.round((netPay - TaxCalc.taxCalc(netPay)) * 100) / 100.0;   // {{grossPay = netPay - tax}} ;
 
-        if (age > 60) {
-            retirement = true;
+        if ((age > 58) && (workQuality >= 78)) {
+            exReward = true;
         } else {
-            retirement = false;
+            exReward = false;
         }
 
         returnArr.add(grossPay.toString());
-        returnArr.add(retirement.toString());
+        returnArr.add(exReward.toString());
 
         return returnArr;
     }

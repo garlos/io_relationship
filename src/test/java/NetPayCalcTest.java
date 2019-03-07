@@ -10,7 +10,7 @@ public class NetPayCalcTest {
         NetPayCalc netPayC = new NetPayCalc();
         InputGenerator inRang = new InputGenerator();
         ArrayList<ArrayList<Integer>> dSet = inRang.setInputData();
-        ArrayList<String> xArr = new ArrayList<>();
+        ArrayList<String> xArr;
 
         DecimalFormat df = new DecimalFormat();
         df.setMaximumFractionDigits(2);
@@ -22,7 +22,13 @@ public class NetPayCalcTest {
             Integer x3 = dSet.get(i).get(3);
             Integer x4 = dSet.get(i).get(4);
             xArr = (netPayC.netPayCalc(x0, x1, x2, x3, x4));
-            System.out.format("No.%d \\ Inputs: %d - %d - %d - %d - %d\\ Salary: %s \\Retirement: %s\n", i + 1, x0, x1, x2, x3, x4,
+            System.out.format("No.%d \\ Inputs: %d - %d - %d - %d - %d\\ Salary: %s \\Retirement: %s\n",
+                    i + 1,
+                    x0,
+                    x1,
+                    x2,
+                    x3,
+                    x4,
                     xArr.get(0),
                     xArr.get(1));
             xArr.clear();
