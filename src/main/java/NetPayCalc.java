@@ -4,7 +4,7 @@ public class NetPayCalc {
 
     final private double STANDARD;
     private double rate;
-    private ArrayList<String> returnArr = new ArrayList<>();
+
 
     public NetPayCalc() {
         STANDARD = 4;
@@ -17,6 +17,7 @@ public class NetPayCalc {
         Double netPay;
         Double grossPay;
         Boolean exReward;
+        ArrayList<String> returnArr = new ArrayList<>();
 
         switch (staffType) {
             case 1:
@@ -32,7 +33,7 @@ public class NetPayCalc {
 
         netPay = (hours * (STANDARD * rate)) + (exHours * (rate * (STANDARD * 2)));
 
-        if ((hours>180) && (exHours >= 25)) {
+        if (exHours >= 25) {
             exPay += (exHours - 25) * (STANDARD * rate);     //reward
         } else if ((exHours >= 20) ) {
             netPay += 200;
