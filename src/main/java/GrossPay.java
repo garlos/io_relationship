@@ -32,7 +32,6 @@ public class GrossPay {
 //            netPay = Math.round((netPay * 100) / 100.0);
 //            System.out.println("Net Pay  : " + netPay);
 //
-//            grossPay = Math.round((netPay - TaxCalc.taxCalc(netPay)) * 100) / 100.0;   // {{grossPay = netPay - tax}} ;
 //            dataSet[i][4] = grossPay;       //save output in index 4 of dataset
 //            System.out.println("Gross Pay: " + grossPay);
 //            System.out.println("==========================");

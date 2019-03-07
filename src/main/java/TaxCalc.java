@@ -1,10 +1,13 @@
 public class TaxCalc {
+    private static Double tax;
+
     public static double taxCalc(double netPay) {
+
         if (netPay > 1500) {
-            netPay *= 0.09;
+            tax = netPay * 0.09;
         } else if (netPay <= 1500) {
-            netPay *= 0.05;
+            tax = netPay * 0.05;
         }
-        return netPay;
+        return tax;
     }
 }

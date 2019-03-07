@@ -46,6 +46,7 @@ public class InputGenerator {
                             row.add(workHour[j]);
                             row.add(exHour[z]);
                             row.add(quality[w]);
+                            row.add(RandomRange.intRandom(20,65)); //age
                             ArrayList<Integer> arrC2 = new ArrayList<>(row);
                             aList.add(arrC2);
                             count++;
