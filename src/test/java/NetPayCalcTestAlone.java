@@ -5,6 +5,6 @@ public class NetPayCalcTestAlone {
     @Test
     public void netPayCalc() {
         NetPayCalc netPayC=new NetPayCalc();
-        System.out.print(netPayC.netPayCalc(3,150,16,71,62));
+        System.out.print(netPayC.netPayCalc(3,150,16,71));
     }
 }

@@ -1,18 +1,16 @@
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
-public class SaveCSV {
+public class CsvOperation {
 
-    public void save(ArrayList inSet, String[][] outSet) throws IOException {
+    public void saveData(ArrayList inSet, String[][] outSet) throws IOException {
 
         File file = new File("test.csv");
         if (file.exists()) {
             file.delete();
         }
-
 
         FileWriter fw = null;
         try {
@@ -22,7 +20,7 @@ public class SaveCSV {
         }
 
         BufferedWriter bw = new BufferedWriter(fw);
-        bw.write("No,StaffType,WorkHours,Ex-Works,Quality,Age,Salary,Ex-Reward");
+        bw.write("No,StaffType,WorkHours,Quality,Age,Salary,Ex-Reward");
         bw.newLine();
         for (int i = 0; i < inSet.size(); i++) {
             bw.write(String.valueOf(i + 1) + "," +
@@ -36,5 +34,21 @@ public class SaveCSV {
         }
         bw.close();
         fw.close();
+    }
+
+
+    public List<List<String>> readData() throws IOException {
+        String file = "test.csv";
+        String line;
+        List<List<String>> records = new ArrayList<>();
+        try (BufferedReader br = new BufferedReader(new FileReader(file))) {
+            while ((line = br.readLine()) != null) {
+                String[] values = line.split(",");
+                records.add(Arrays.asList(values));
+            }
+        } catch (FileNotFoundException e) {
+            //Some error logging
+        }
+        return records;
     }
 }

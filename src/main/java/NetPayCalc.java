@@ -11,7 +11,7 @@ public class NetPayCalc {
         rate = 0;
     }
 
-    public ArrayList<String> netPayCalc(Integer staffType, Integer hours, Integer exHours, Integer workQuality, Integer age) {
+    public ArrayList<String> netPayCalc(Integer staffType, Integer hours, Integer workQuality, Integer age) {
 
         Double exPay = 0.0;
         Double netPay;
@@ -31,11 +31,11 @@ public class NetPayCalc {
                 break;
         }
 
-        netPay = (hours * (STANDARD * rate)) + (exHours * (rate * (STANDARD * 2)));
+        netPay = (hours * (STANDARD * rate)) + ((rate * (STANDARD * 2)));
 
-        if (exHours >= 25) {
-            exPay += (exHours - 25) * (STANDARD * rate);     //reward
-        } else if ((exHours >= 20) ) {
+        if (hours >= 25) {
+            exPay += (hours - 25) * (STANDARD * rate);     //reward
+        } else if ((hours >= 20) ) {
             netPay += 200;
         }
         netPay += exPay;
