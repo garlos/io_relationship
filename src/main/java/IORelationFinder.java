@@ -1,19 +1,19 @@
-
-
 import java.util.*;
 
 public class IORelationFinder {
-    private List<List<String>> content;
-    private ArrayList<String> tmpContent = new ArrayList<>(content.size());
+
+    private List<List<String>> content = new ArrayList<>();
+    private List<List<String>> copyContent = new ArrayList<>();
+
+    private ArrayList<String> tmpContent = new ArrayList<>();
 
 
     public void ioRelFinder(List<List<String>> content) {
         this.content = content;
+        this.copyContent = content;
 
-        extractSpecifiedRecords(content);
+        extractSpecifiedRecords(this.content);
 //        relout1_in1();
-
-
     }
 
     public void extractSpecifiedRecords(List<List<String>> content) {
@@ -23,23 +23,25 @@ public class IORelationFinder {
             String str = content.get(j).get(2).trim() +
                     content.get(j).get(3).trim() +
                     content.get(j).get(4).trim();
-            for (int i = j; i < content.size(); i++) {
-                String tempStr = content.get(i).get(2).trim() +
-                        content.get(i).get(3).trim() +
-                        content.get(i).get(4).trim();
-                String x1 = content.get(i).get(1);
-                String out1 = content.get(i).get(5);
+            for (int i = j; i < copyContent.size(); i++) {
+                String tempStr = copyContent.get(i).get(2).trim() +
+                        copyContent.get(i).get(3).trim() +
+                        copyContent.get(i).get(4).trim();
+                String x1 = copyContent.get(i).get(1);
+                String out1 = copyContent.get(i).get(5);
                 if (str.equals(tempStr)) {
-                    tmpContent.add(content.get(i).get(0));
-                    System.out.format("No.%s:  ", tmpContent.get(count));
+                    tmpContent.add(copyContent.get(i).get(0));
+                    copyContent.remove(i - 1);
                     System.out.format("%s - ", content.get(i).get(2).trim());
                     System.out.format("%s - ", content.get(i).get(3).trim());
                     System.out.format("%s\n", content.get(i).get(4).trim());
-                    System.out.println("------------------------");
                     count++;
                 }
             }
-            System.out.println("similare counts: " + count);
+            System.out.println("copyContent Length: " + copyContent.size());
+            System.out.println("Content Length: " + content.size());
+            System.out.println("similar counts: " + (count / 3));
+            System.out.println("------------------------");
         }
     }
 

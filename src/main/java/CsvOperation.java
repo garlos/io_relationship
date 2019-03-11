@@ -7,7 +7,7 @@ public class CsvOperation {
 
     public void saveData(ArrayList inSet, String[][] outSet) throws IOException {
 
-        File file = new File("test.csv");
+        File file = new File("DataSet.csv");
         if (file.exists()) {
             file.delete();
         }
@@ -38,7 +38,7 @@ public class CsvOperation {
 
 
     public List<List<String>> readData() throws IOException {
-        String file = "test.csv";
+        String file = "DataSet.csv";
         String line;
         List<List<String>> records = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(file))) {

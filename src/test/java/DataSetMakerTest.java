@@ -3,7 +3,7 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
-public class DataSetMaker {
+public class DataSetMakerTest {
 
     @org.junit.Test
     public void netPayCalc() throws IOException {
