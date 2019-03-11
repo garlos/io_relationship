@@ -5,10 +5,16 @@ import java.util.ArrayList;
 //        max input (3,200.0,50.0,90.0) = output:4030
 
 public class InputGenerator {
-    private Integer[] staffType = new Integer[3];
-    private Integer[] workHour = new Integer[50];
-    private Integer[] quality = new Integer[20];
-    private Integer[] age = new Integer[45];
+
+
+    //    private Integer[] staffType = new Integer[3];
+//    private Integer[] workHour = new Integer[50];
+//    private Integer[] quality = new Integer[20];
+//    private Integer[] age = new Integer[45];
+
+
+    TestSuite testSuite = new TestSuite();
+    ArrayList<TestSuite> testSuitesArr = new ArrayList<>();
 
     private ArrayList<ArrayList<Integer>> aList = new ArrayList<>();
     private ArrayList<Integer> row = new ArrayList<>();
@@ -18,7 +24,7 @@ public class InputGenerator {
 
         //generate Sequential inputs
         for (int i = 0; i < 3; i++) {
-            staffType[i] = i + 1;
+            testSuite.setStaffType(i);
         }
         for (int i = 0; i < 50; i++) {
             workHour[i] = i + 150;
@@ -29,6 +35,7 @@ public class InputGenerator {
         for (int i = 0; i < 45; i++) {
             age[i] = i + 20;
         }
+        testSuitesArr.add(testSuite) = i + 1;
 
 
         // aList is an ArrayList of ArrayLists
@@ -56,5 +63,5 @@ public class InputGenerator {
             }
         }
         return aList;
-}
+    }
 }
