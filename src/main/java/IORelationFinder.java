@@ -12,21 +12,30 @@ public class IORelationFinder {
     }
 
     public void extractSpecifiedRecords() {
-
+        ArrayList<ArrayList<TestSuite>> testsuitsArrArr = new ArrayList<>();
         Integer count = 0;
+        Integer cnt = 0;
         for (int j = 0; j < testSuiteArr.size(); j++) {
-            for (int i = j; i < testSuiteArr.size(); i++) {
-                if ((testSuiteArr.get(i).getWorkHour().equals(testSuiteArr.get(i + 1).getWorkHour())) &&
-                        (testSuiteArr.get(i).getQuality().equals(testSuiteArr.get(i + 1).getQuality())) &&
-                        (testSuiteArr.get(i)).getAge().equals(testSuiteArr.get(i + 1).getAge())) {
-                    System.out.format("No. %d \\ %d - %d - %d ",
-                            testSuiteArr.get(i).getTestId(),
-                            testSuiteArr.get(i).getWorkHour(),
-                            testSuiteArr.get(i).getQuality(),
-                            testSuiteArr.get(i).getAge());
+            for (int i = 0; i < testSuiteArr.size(); i++) {
+                if ((testSuiteArr.get(i).getWorkHour().equals(testSuiteArr.get(j).getWorkHour())) &&
+                        (testSuiteArr.get(i).getQuality().equals(testSuiteArr.get(j).getQuality())) &&
+                        (testSuiteArr.get(i)).getAge().equals(testSuiteArr.get(j).getAge())) {
+                    testsuitsArrArr.get(cnt).add(testSuiteArr.get(i));
+
+//                    System.out.format("No.%d \\ %d - %d - %d \n",
+//                            testSuiteArr.get(i).getTestId(),
+//                            testSuiteArr.get(i).getWorkHour(),
+//                            testSuiteArr.get(i).getQuality(),
+//                            testSuiteArr.get(i).getAge());
                 }
                 count++;
             }
+            cnt++;
+            for (ArrayList b : testsuitsArrArr)
+                for (Object a : b) {
+                    System.out.println(a.toString());
+                }
+            System.out.println("-------------------------");
         }
     }
 }

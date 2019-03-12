@@ -12,7 +12,6 @@ public class IORelationFinderTest {
         String fileName = "DataSet.csv";
         CsvOperation csv = new CsvOperation();
         content = csv.readData(fileName);
-
         IORelationFinder ioRFinder = new IORelationFinder(content);
         ioRFinder.extractSpecifiedRecords();
     }

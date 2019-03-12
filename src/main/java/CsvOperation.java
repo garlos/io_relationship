@@ -1,7 +1,7 @@
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+        import java.util.ArrayList;
+        import java.util.Arrays;
+        import java.util.List;
 
 public class CsvOperation {
 
@@ -46,11 +46,8 @@ public class CsvOperation {
             while ((line = br.readLine()) != null) {
 
                 TestSuite testSuite = new TestSuite();
-
                 String[] values = line.split(",");
                 testSuite.setTestId(Integer.parseInt(values[0]));
-//                values[0] + " " + values[1] + " " + values[2]
-//                System.out.println(testSuite.getTestId().toString());
                 testSuite.setStaffType(Integer.parseInt(values[1]));
                 testSuite.setWorkHour(Integer.parseInt(values[2]));
                 testSuite.setQuality(Integer.parseInt(values[3]));
