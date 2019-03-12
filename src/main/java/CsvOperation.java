@@ -5,7 +5,7 @@ import java.util.List;
 
 public class CsvOperation {
 
-    public void saveData(ArrayList inSet, String[][] outSet) throws IOException {
+    public void saveData(ArrayList<TestSuite> dSet, String csvFields) throws IOException {
 
         File file = new File("DataSet.csv");
         if (file.exists()) {
@@ -20,15 +20,16 @@ public class CsvOperation {
         }
 
         BufferedWriter bw = new BufferedWriter(fw);
-        bw.write("No,StaffType,WorkHours,Quality,Age,Salary,Ex-Reward");
+        bw.write(csvFields);
         bw.newLine();
-        for (int i = 0; i < inSet.size(); i++) {
-            bw.write(String.valueOf(i + 1) + "," +
-                    inSet.get(i).toString()
-                            .replaceAll("\\[", "")
-                            .replaceAll("\\]", "") + "," +
-                    outSet[i][0] + "," +
-                    outSet[i][1]
+        for (int i = 0; i < dSet.size(); i++) {
+            bw.write(dSet.get(i).getTestId().toString() + "," +
+                            dSet.get(i).getStaffType().toString() + "," +
+                            dSet.get(i).getWorkHour().toString() + "," +
+                            dSet.get(i).getQuality().toString() + "," +
+                            dSet.get(i).getAge().toString() + "," +
+                            dSet.get(i).getSalary().toString() + "," +
+                            dSet.get(i).getExReward().toString() + ","
             );
             bw.newLine();
         }
