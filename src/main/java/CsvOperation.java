@@ -39,13 +39,18 @@ public class CsvOperation {
 
     public ArrayList<TestSuite> readData(String fileName) throws IOException {
         String line;
+        int count = 0;
         ArrayList<TestSuite> testSuitesArr = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            br.readLine();
             while ((line = br.readLine()) != null) {
+
                 TestSuite testSuite = new TestSuite();
 
                 String[] values = line.split(",");
                 testSuite.setTestId(Integer.parseInt(values[0]));
+//                values[0] + " " + values[1] + " " + values[2]
+//                System.out.println(testSuite.getTestId().toString());
                 testSuite.setStaffType(Integer.parseInt(values[1]));
                 testSuite.setWorkHour(Integer.parseInt(values[2]));
                 testSuite.setQuality(Integer.parseInt(values[3]));
@@ -53,6 +58,7 @@ public class CsvOperation {
                 testSuite.setSalary(Integer.parseInt(values[5]));
                 testSuite.setExReward(Boolean.valueOf(values[6]));
                 testSuitesArr.add(testSuite);
+                count++;
             }
         } catch (FileNotFoundException e) {
             //Some error logging
