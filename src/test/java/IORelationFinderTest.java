@@ -2,18 +2,18 @@ import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 
 public class IORelationFinderTest {
-    private List<List<String>> content = new ArrayList<>();
 
     @Test
     public void ioRelFinder() throws IOException {
-
-        IORelationFinder ioRFinder = new IORelationFinder();
+        ArrayList<TestSuite> content;
+        String fileName = "DataSet.csv";
         CsvOperation csv = new CsvOperation();
-        content = csv.readData();
-        ioRFinder.ioRelFinder(content);
+        content = csv.readData(fileName);
+
+        IORelationFinder ioRFinder = new IORelationFinder(content);
+        ioRFinder.extractSpecifiedRecords();
     }
 }

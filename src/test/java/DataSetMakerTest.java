@@ -1,20 +1,19 @@
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 
 
 public class DataSetMakerTest {
 
+
     @org.junit.Test
     public void netPayCalc() throws IOException {
+
+        String csvFields = "No,StaffType,WorkHours,Quality,Age,Salary,Ex-Reward";
+        String fileName = "DataSet.csv";
         NetPayCalc netPayC = new NetPayCalc();
         InputGenerator inRang = new InputGenerator();
         ArrayList<TestSuite> dSet = inRang.setInputData();
         CsvOperation csv = new CsvOperation();
-
-//        DecimalFormat df = new DecimalFormat();
-//        df.setMaximumFractionDigits(2);
-
 
         for (int i = 0; i < dSet.size(); i++) {
 
@@ -34,9 +33,10 @@ public class DataSetMakerTest {
                     dSet.get(i).getSalary(),
                     dSet.get(i).getExReward());
         }
-        String csvFields = "No,StaffType,WorkHours,Quality,Age,Salary,Ex-Reward";
 
-        csv.saveData(dSet, csvFields);
+        csv.saveData(dSet, fileName, csvFields);
+
+
 //        assertArrayEquals(xArr, xArr);
 //        assertEquals(1897,(int)b);
     }

@@ -1,22 +1,18 @@
 import java.util.*;
 
 public class IORelationFinder {
-
-    private List<List<String>> content = new ArrayList<>();
-    private List<List<String>> copyContent = new ArrayList<>();
-
+    private ArrayList<TestSuite> content;
+    private ArrayList<TestSuite> copyContent;
     private ArrayList<String> tmpContent = new ArrayList<>();
 
 
-    public void ioRelFinder(List<List<String>> content) {
+    public IORelationFinder(ArrayList<TestSuite> content) {
         this.content = content;
         this.copyContent = content;
-
-        extractSpecifiedRecords(this.content);
-//        relout1_in1();
     }
 
-    public void extractSpecifiedRecords(List<List<String>> content) {
+
+    public void extractSpecifiedRecords() {
 
         int count = 0;
         for (int j = 1; j < content.size(); j++) {
@@ -44,23 +40,4 @@ public class IORelationFinder {
             System.out.println("------------------------");
         }
     }
-
-
-//    public void relout1_in1() {
-//        int count=0;
-//
-//        for (int j = 1; j < content.size() - 1; j++) {
-//            System.out.format("period: %d\n", j);
-//            for (int i = 1; i < content.size() - 1; i++) {
-//                if ((!content.get(j).get(1).equals(content.get(j + 1).get(1))) &&
-//                        (content.get(i).get(5).equals(content.get(i + 1).get(5)))) {
-//                    count++;
-//                    System.out.format("this row: %s - %s - %s\n", content.get(i).get(0),
-//                            content.get(i).get(1),
-//                            content.get(i).get(5));
-//                }
-//            }
-//        }
-//        System.out.format("count: %d",count );
-//    }
 }
