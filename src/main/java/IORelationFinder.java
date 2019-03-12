@@ -31,10 +31,10 @@ public class IORelationFinder {
                 count++;
             }
             cnt++;
-            for (ArrayList b : testsuitsArrArr)
-                for (Object a : b) {
-                    System.out.println(a.toString());
-                }
+//            for (ArrayList b : testsuitsArrArr)
+//                for (Object a : b) {
+//                    System.out.println(a.toString());
+//                }
             System.out.println("-------------------------");
         }
     }
