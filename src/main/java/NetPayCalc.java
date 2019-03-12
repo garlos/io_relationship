@@ -11,13 +11,12 @@ public class NetPayCalc {
         rate = 0;
     }
 
-    public ArrayList<String> netPayCalc(Integer staffType, Integer hours, Integer workQuality, Integer age) {
+    public TestSuite netPayCalc(Integer staffType, Integer hours, Integer workQuality, Integer age) {
 
         Double exPay = 0.0;
         Double netPay;
-        Double grossPay;
+        Long grossPay;
         Boolean exReward;
-        ArrayList<String> returnArr = new ArrayList<>();
 
         switch (staffType) {
             case 1:
@@ -35,12 +34,12 @@ public class NetPayCalc {
 
         if (hours >= 25) {
             exPay += (hours - 25) * (STANDARD * rate);     //reward
-        } else if ((hours >= 20) ) {
+        } else if ((hours >= 20)) {
             netPay += 200;
         }
         netPay += exPay;
 
-        grossPay = Math.round((netPay - TaxCalc.taxCalc(netPay)) * 100) / 100.0;   // {{grossPay = netPay - tax}} ;
+        grossPay = Math.round((netPay - TaxCalc.taxCalc(netPay)) * 100 / 100.0);   // {{grossPay = netPay - tax}} ;
 
         if ((age > 58) && (workQuality >= 78)) {
             exReward = true;
@@ -48,9 +47,11 @@ public class NetPayCalc {
             exReward = false;
         }
 
-        returnArr.add(grossPay.toString());
-        returnArr.add(exReward.toString());
+        TestSuite testSuite = new TestSuite();
 
-        return returnArr;
+        testSuite.setSalary(Math.toIntExact(grossPay));
+        testSuite.setExReward(exReward);
+
+        return testSuite;
     }
 }
