@@ -1,11 +1,13 @@
 import java.io.*;
-        import java.util.ArrayList;
-        import java.util.Arrays;
-        import java.util.List;
+import java.util.ArrayList;
 
 public class CsvOperation {
 
-    public void saveData(ArrayList<TestSuite> dSet, String fileName, String csvFields) throws IOException {
+    private static ArrayList<TestSuite> testSuitesArr = new ArrayList<>();
+    private static String csvFields;
+
+
+    public static void saveCSV(ArrayList<TestSuite> dSet, String fileName, String csvFields) throws IOException {
 
         File file = new File(fileName);
         if (file.exists()) {
@@ -37,10 +39,9 @@ public class CsvOperation {
     }
 
 
-    public ArrayList<TestSuite> readData(String fileName) throws IOException {
+    public static ArrayList<TestSuite> readCsv(String fileName) throws IOException {
         String line;
         int count = 0;
-        ArrayList<TestSuite> testSuitesArr = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
             br.readLine();
             while ((line = br.readLine()) != null) {
@@ -62,4 +63,16 @@ public class CsvOperation {
         }
         return testSuitesArr;
     }
+
+
+    public static String readCsvFields(String fileName) throws IOException {
+        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+            csvFields = br.readLine();
+        } catch (FileNotFoundException e) {
+            //Some error logging
+        }
+        return csvFields;
+    }
+
+
 }

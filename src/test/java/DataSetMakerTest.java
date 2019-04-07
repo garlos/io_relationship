@@ -8,7 +8,7 @@ public class DataSetMakerTest {
     @org.junit.Test
     public void netPayCalc() throws IOException {
 
-        String csvFields = "No,StaffType,WorkHours,Quality,Age,Salary,Ex-Reward";
+        String csvFields = "No,in_StaffType,in_WorkHours,in_Quality,in_Age,out_Salary,out_Ex-Reward";
         String fileName = "DataSet.csv";
         NetPayCalc netPayC = new NetPayCalc();
         InputGenerator inRang = new InputGenerator();
@@ -34,7 +34,7 @@ public class DataSetMakerTest {
                     dSet.get(i).getExReward());
         }
 
-        csv.saveData(dSet, fileName, csvFields);
+        csv.saveCSV(dSet, fileName, csvFields);
 
 
 //        assertArrayEquals(xArr, xArr);
