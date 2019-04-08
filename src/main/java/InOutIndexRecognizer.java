@@ -1,3 +1,4 @@
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,5 +24,19 @@ public class InOutIndexRecognizer {
         fieldsIndex.add(outputIndexes);
 
         return fieldsIndex;
+    }
+
+    public static Field[] fieldsRecognizer(Object object) {
+
+//        TestCase testSuite = new TestCase();
+        Class objectClass = object.getClass();
+        Field[] fields = objectClass.getDeclaredFields();
+//        System.out.println(fields[0].getName());
+
+
+//        fieldsIndex.add(inputIndexes);
+//        fieldsIndex.add(outputIndexes);
+
+        return fields;
     }
 }

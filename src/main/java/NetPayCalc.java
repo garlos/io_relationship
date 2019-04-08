@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class NetPayCalc {
 
@@ -11,7 +10,7 @@ public class NetPayCalc {
         rate = 0;
     }
 
-    public TestSuite netPayCalc(Integer staffType, Integer hours, Integer workQuality, Integer age) {
+    public TestCase netPayCalc(Integer staffType, Integer hours, Integer workQuality, Integer age) {
 
         Double exPay = 0.0;
         Double netPay;
@@ -47,7 +46,7 @@ public class NetPayCalc {
             exReward = false;
         }
 
-        TestSuite testSuite = new TestSuite();
+        TestCase testSuite = new TestCase();
 
         testSuite.setSalary(Math.toIntExact(grossPay));
         testSuite.setExReward(exReward);

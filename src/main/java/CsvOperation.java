@@ -1,15 +1,19 @@
 import java.io.*;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
+import java.util.List;
+
+import Utils.*;
 
 public class CsvOperation {
 
-    private static ArrayList<TestSuite> testSuitesArr = new ArrayList<>();
+    private static ArrayList<TestCase> testSuitesArr = new ArrayList<>();
     private static String csvFields;
 
 
-    public static void saveCSV(ArrayList<TestSuite> dSet, String fileName, String csvFields) throws IOException {
+    public static void saveCSV(ArrayList<TestCase> dSet, String filePath, String csvFields) throws IOException {
 
-        File file = new File(fileName);
+        File file = new File(filePath);
         if (file.exists()) {
             file.delete();
         }
@@ -39,27 +43,28 @@ public class CsvOperation {
     }
 
 
-    public static ArrayList<TestSuite> readCsv(String fileName) throws IOException {
+    public static ArrayList<TestCase> readCsvData(String filePath) throws IOException {
+
         String line;
-        int count = 0;
-        try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
+        List<Field> fields = ReflectionUtils.getAllFields(TestCase.class);
+
+        try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             br.readLine();
             while ((line = br.readLine()) != null) {
 
-                TestSuite testSuite = new TestSuite();
+                TestCase testCase = new TestCase();
                 String[] values = line.split(",");
-                testSuite.setTestId(Integer.parseInt(values[0]));
-                testSuite.setStaffType(Integer.parseInt(values[1]));
-                testSuite.setWorkHour(Integer.parseInt(values[2]));
-                testSuite.setQuality(Integer.parseInt(values[3]));
-                testSuite.setAge(Integer.parseInt(values[4]));
-                testSuite.setSalary(Integer.parseInt(values[5]));
-                testSuite.setExReward(Boolean.valueOf(values[6]));
-                testSuitesArr.add(testSuite);
-                count++;
+                for (int i = 0; i < fields.size(); i++) {
+                    ReflectionUtils.setField(fields.get(i), testCase, values[i]);
+                }
+                System.out.println(testCase.getSalary());
+                testSuitesArr.add(testCase);
             }
+
         } catch (FileNotFoundException e) {
             //Some error logging
+        } catch (IllegalAccessException e) {
+            e.printStackTrace();
         }
         return testSuitesArr;
     }
@@ -74,5 +79,5 @@ public class CsvOperation {
         return csvFields;
     }
 
-
 }
+

@@ -1,4 +1,4 @@
-public class TestSuite {
+public class TestCase {
     private Integer testId;
     private Integer staffType;
     private Integer workHour;
@@ -6,6 +6,7 @@ public class TestSuite {
     private Integer age;
     private Integer salary;
     private Boolean exReward;
+
 
     public Integer getTestId() {
         return testId;

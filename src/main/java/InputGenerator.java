@@ -5,16 +5,16 @@ import java.util.ArrayList;
 
 public class InputGenerator {
 
-    private ArrayList<TestSuite> testSuitesArr = new ArrayList<>();
+    private ArrayList<TestCase> testSuitesArr = new ArrayList<>();
 
-    public ArrayList<TestSuite> setInputData() {
+    public ArrayList<TestCase> setInputData() {
         Integer count = 1;
         //generate sequential inputs
         for (int i = 1; i < 4; i++) {
             for (int j = 1; j < 51; j++) {
                 for (int w = 1; w < 21; w++) {
                     for (int z = 1; z < 46; z++) {
-                        TestSuite testSuite = new TestSuite();
+                        TestCase testSuite = new TestCase();
                         testSuite.setTestId(count++);
                         testSuite.setStaffType(i);
                         testSuite.setWorkHour(j + 149);

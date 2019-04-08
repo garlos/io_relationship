@@ -14,7 +14,7 @@ public class GrossPay {
         Double netPay;
         int personCount = 100;
         Double[][] dataSet = new Double[personCount][5];
-        NetPayCalc netPaymentCalc = new NetPayCalc();
+//        NetPayCalc netPaymentCalc = new NetPayCalc();
 
 
 
