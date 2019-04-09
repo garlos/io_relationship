@@ -2,10 +2,8 @@ package Utils;
 
 import java.io.*;
 import java.lang.reflect.Field;
-import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
 import SUT.TestCase;
 
 public class CsvOperation {
