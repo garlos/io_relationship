@@ -1,4 +1,4 @@
-//inputs:
+package SUT;//inputs:
 //	1-	staffType: 1:office		2:worker	3:Engineer
 //  2-	work Hours: 100-200
 //  3-	extra Hours: 0-50
@@ -14,7 +14,7 @@ public class GrossPay {
         Double netPay;
         int personCount = 100;
         Double[][] dataSet = new Double[personCount][5];
-//        NetPayCalc netPaymentCalc = new NetPayCalc();
+//        SUT.NetPayCalc netPaymentCalc = new SUT.NetPayCalc();
 
 
 

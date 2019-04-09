@@ -1,3 +1,5 @@
+import SUT.TestCase;
+
 import java.util.ArrayList;
 
 //        min input (1,151.0,1.0,71.0) = output:1897
@@ -5,9 +7,9 @@ import java.util.ArrayList;
 
 public class InputGenerator {
 
-    private ArrayList<TestCase> testSuitesArr = new ArrayList<>();
+    private static ArrayList<TestCase> testSuitesArr = new ArrayList<>();
 
-    public ArrayList<TestCase> setInputData() {
+    public static ArrayList<TestCase> setInputData() {
         Integer count = 1;
         //generate sequential inputs
         for (int i = 1; i < 4; i++) {

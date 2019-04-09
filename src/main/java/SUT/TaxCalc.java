@@ -1,3 +1,5 @@
+package SUT;
+
 public class TaxCalc {
     private static Double tax;
 

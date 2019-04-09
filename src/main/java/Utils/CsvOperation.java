@@ -1,9 +1,12 @@
+package Utils;
+
 import java.io.*;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
-import Utils.*;
+import SUT.TestCase;
 
 public class CsvOperation {
 
@@ -11,43 +14,44 @@ public class CsvOperation {
     private static String csvFields;
 
 
-    public static void saveCSV(ArrayList<TestCase> dSet, String filePath, String csvFields) throws IOException {
+    public static void saveCSV(ArrayList<TestCase> dSet, String filePath, String csvHeaders) throws IOException {
+
 
         File file = new File(filePath);
+
         if (file.exists()) {
             file.delete();
         }
 
-        FileWriter fw = null;
+        FileWriter fw;
         try {
             fw = new FileWriter(file);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        BufferedWriter bw = new BufferedWriter(fw);
-        bw.write(csvFields);
-        bw.newLine();
-        for (int i = 0; i < dSet.size(); i++) {
-            bw.write(dSet.get(i).getTestId().toString() + "," +
-                    dSet.get(i).getStaffType().toString() + "," +
-                    dSet.get(i).getWorkHour().toString() + "," +
-                    dSet.get(i).getQuality().toString() + "," +
-                    dSet.get(i).getAge().toString() + "," +
-                    dSet.get(i).getSalary().toString() + "," +
-                    dSet.get(i).getExReward().toString() + ","
-            );
+            BufferedWriter bw = new BufferedWriter(fw);
+            bw.write(csvHeaders);
             bw.newLine();
+            for (int i = 0; i < dSet.size(); i++) {
+
+                ArrayList<String> values = ReflectionUtils.getAllFieldsStringValue(dSet.get(i));
+                for (int j = 0; j < values.size(); j++) {
+                    bw.write(values.get(j) + ",");
+                }
+                bw.newLine();
+            }
+            bw.close();
+            fw.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("file not find");
+        } catch (NumberFormatException e) {
+            System.out.println("not a number");
         }
-        bw.close();
-        fw.close();
+        System.out.println("Note:<saveCSV>  \"DataSet.csv\" file is saved");
     }
 
 
     public static ArrayList<TestCase> readCsvData(String filePath) throws IOException {
 
-        String line;
         List<Field> fields = ReflectionUtils.getAllFields(TestCase.class);
-
+        String line;
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             br.readLine();
             while ((line = br.readLine()) != null) {
@@ -57,14 +61,16 @@ public class CsvOperation {
                 for (int i = 0; i < fields.size(); i++) {
                     ReflectionUtils.setField(fields.get(i), testCase, values[i]);
                 }
-                System.out.println(testCase.getSalary());
+                System.out.println(testCase.getTestId());
                 testSuitesArr.add(testCase);
             }
 
         } catch (FileNotFoundException e) {
-            //Some error logging
+            System.out.println("file not find");
         } catch (IllegalAccessException e) {
             e.printStackTrace();
+        } catch (NumberFormatException e) {
+            System.out.println("not a number");
         }
         return testSuitesArr;
     }
@@ -77,6 +83,18 @@ public class CsvOperation {
             //Some error logging
         }
         return csvFields;
+    }
+
+
+    public static String csvHeadersGenerator() {
+
+        StringBuilder headers = new StringBuilder();
+
+        List<Field> fields = ReflectionUtils.getAllFields(TestCase.class);
+        for (int i = 0; i < fields.size(); i++) {
+            headers.append(fields.get(i).getName() + ",");
+        }
+        return headers.toString();
     }
 
 }

@@ -1,3 +1,5 @@
+package SUT;
+
 import java.util.Random;
 
 public class RandomRange {

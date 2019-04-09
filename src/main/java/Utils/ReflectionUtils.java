@@ -1,5 +1,6 @@
 package Utils;
 
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -83,44 +84,27 @@ public class ReflectionUtils {
         if (value == null && field.getType().isPrimitive()) {
             return;
         }
-
-        field.setAccessible(true);
-//        if (int.class.equals(field.getType())) {
-//            field.setInt(instance, (int) value);
-//        } else if (long.class.equals(field.getType())) {
-//            field.setLong(instance, (long) value);
-//        } else if (double.class.equals(field.getType())) {
-//            field.setDouble(instance, (double) value);
-//        } else if (void.class.equals(field.getType())) {
-//
-//        } else if (float.class.equals(field.getType())) {
-//            field.setFloat(instance, (float) value);
-//        } else if (byte.class.equals(field.getType())) {
-//            field.setByte(instance, (byte) value);
-//        } else if (char.class.equals(field.getType())) {
-//            field.setChar(instance, (char) value);
-//        } else if (boolean.class.equals(field.getType())) {
-//            field.setBoolean(instance, (boolean) value);
-//        } else if (short.class.equals(field.getType())) {
-//            field.setShort(instance, (short) value);
-
-
-        if (Integer.class.equals(field.getType())) {
-            field.set(instance, (Integer.valueOf(value.toString())));
-        } else if (Long.class.equals(field.getType())) {
-            field.setLong(instance, (Long.valueOf(value.toString())));
-        } else if (Double.class.equals(field.getType())) {
-            field.setDouble(instance, (Double.valueOf(value.toString())));
-        } else if (Float.class.equals(field.getType())) {
-            field.setFloat(instance, (Float.valueOf(value.toString())));
-        } else if (Byte.class.equals(field.getType())) {
-            field.setByte(instance, (Byte.valueOf(value.toString())));
-        } else if (Boolean.class.equals(field.getType())) {
-            field.set(instance, (Boolean.valueOf(value.toString())));
-        } else if (Short.class.equals(field.getType())) {
-            field.setShort(instance, (Short.valueOf(value.toString())));
-        } else {
-            field.set(instance, value);
+        try {
+            field.setAccessible(true);
+            if (Integer.class.equals(field.getType())) {
+                field.set(instance, (Integer.valueOf(String.valueOf(value))));
+            } else if (Long.class.equals(field.getType())) {
+                field.setLong(instance, (Long.valueOf(String.valueOf(value))));
+            } else if (Double.class.equals(field.getType())) {
+                field.setDouble(instance, (Double.valueOf(String.valueOf(value))));
+            } else if (Float.class.equals(field.getType())) {
+                field.setFloat(instance, (Float.valueOf(String.valueOf(value))));
+            } else if (Byte.class.equals(field.getType())) {
+                field.setByte(instance, (Byte.valueOf(String.valueOf(value))));
+            } else if (Boolean.class.equals(field.getType())) {
+                field.set(instance, (Boolean.valueOf(String.valueOf(value))));
+            } else if (Short.class.equals(field.getType())) {
+                field.setShort(instance, (Short.valueOf(String.valueOf(value))));
+            } else {
+                field.set(instance, value);
+            }
+        } catch (NullPointerException e) {
+            e.printStackTrace();
         }
     }
 
@@ -150,6 +134,76 @@ public class ReflectionUtils {
             return field.get(instance);
         }
     }
+
+    public static ArrayList<String> getAllFieldsStringValue(Object instance) {
+
+        List<Field> fields = ReflectionUtils.getAllFields(instance.getClass());
+        ArrayList<String> value = new ArrayList<>(fields.size());
+
+        for (Field field : fields) {
+            field.setAccessible(true);
+        }
+
+        for (Field field : fields) {
+            try {
+                if (int.class.equals(field.getType())) {
+                    value.add(String.valueOf(field.getInt(instance)));
+
+                } else if (long.class.equals(field.getType())) {
+                    value.add(String.valueOf(field.getLong(instance)));
+
+                } else if (double.class.equals(field.getType())) {
+                    value.add(String.valueOf(field.getDouble(instance)));
+
+                } else if (float.class.equals(field.getType())) {
+                    value.add(String.valueOf(field.getFloat(instance)));
+
+                } else if (byte.class.equals(field.getType())) {
+                    value.add(String.valueOf(field.getByte(instance)));
+
+                } else if (boolean.class.equals(field.getType())) {
+                    value.add(Boolean.toString(field.getBoolean(instance)));
+
+                } else if (short.class.equals(field.getType())) {
+                    value.add(String.valueOf(field.getShort(instance)));
+
+                } else {
+                    value.add(String.valueOf(field));
+                }
+
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            }
+        }
+        return value;
+    }
+
+
+//    public static Object setAllFields(Object instance, Field field) throws IllegalAccessException {
+//
+//        field.setAccessible(true);
+//        if (int.class.equals(field.getType())) {
+//            return field.getInt(instance);
+//        } else if (long.class.equals(field.getType())) {
+//            return field.getLong(instance);
+//        } else if (double.class.equals(field.getType())) {
+//            return field.getDouble(instance);
+//        } else if (void.class.equals(field.getType())) {
+//            return null;
+//        } else if (float.class.equals(field.getType())) {
+//            return field.getFloat(instance);
+//        } else if (byte.class.equals(field.getType())) {
+//            return field.getByte(instance);
+//        } else if (char.class.equals(field.getType())) {
+//            return field.getChar(instance);
+//        } else if (boolean.class.equals(field.getType())) {
+//            return field.getBoolean(instance);
+//        } else if (short.class.equals(field.getType())) {
+//            return field.getShort(instance);
+//        } else {
+//            return field.get(instance);
+//        }
+//    }
 
 
 //    public interface IPropertyAccessor {
@@ -332,4 +386,18 @@ public class ReflectionUtils {
 //            return accessor.getType();
 //        }
 //    }
+
+
+    public static boolean isGetter(Method method) {
+        if (!method.getName().startsWith("get")) return false;
+        if (method.getParameterTypes().length != 0) return false;
+        if (void.class.equals(method.getReturnType())) return false;
+        return true;
+    }
+
+    public static boolean isSetter(Method method) {
+        if (!method.getName().startsWith("set")) return false;
+        if (method.getParameterTypes().length != 1) return false;
+        return true;
+    }
 }
