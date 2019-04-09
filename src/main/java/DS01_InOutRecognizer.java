@@ -1,9 +1,7 @@
-import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
-public class InOutRecognizer {
-
+public class DS01_InOutRecognizer {
 
     public static List<ArrayList<Integer>> inOutRecognizer(String[] fields) {
 
@@ -13,9 +11,9 @@ public class InOutRecognizer {
 
         for (int i = 0; i < fields.length; i++) {
 
-            if (fields[i].startsWith("in_")) {
+            if (fields[i].toLowerCase().startsWith("get_in_")) {
                 inputIndexes.add(i);
-            } else if (fields[i].startsWith("out_")) {
+            } else if (fields[i].toLowerCase().startsWith("get_out_")) {
                 outputIndexes.add(i);
             }
         }
@@ -25,10 +23,4 @@ public class InOutRecognizer {
 
         return fieldsIndex;
     }
-
-//    public static Field[] fieldsRecognizer(Object object) {
-//
-//
-//        return fields;
-//    }
 }

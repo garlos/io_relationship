@@ -5,7 +5,7 @@ import java.util.ArrayList;
 //        min input (1,151.0,1.0,71.0) = output:1897
 //        max input (3,200.0,50.0,90.0) = output:4030
 
-public class InputGenerator {
+public class DS02_InputGenerator {
 
     private static ArrayList<TestCase> testSuitesArr = new ArrayList<>();
 
@@ -18,10 +18,10 @@ public class InputGenerator {
                     for (int z = 1; z < 46; z++) {
                         TestCase testSuite = new TestCase();
                         testSuite.setTestId(count++);
-                        testSuite.setStaffType(i);
-                        testSuite.setWorkHour(j + 149);
-                        testSuite.setQuality(w + 69);
-                        testSuite.setAge(z + 19);
+                        testSuite.set_inp_StaffType(i);
+                        testSuite.set_inp_WorkHour(j + 149);
+                        testSuite.set_inp_Quality(w + 69);
+                        testSuite.set_inp_Age(z + 19);
                         testSuitesArr.add(testSuite);
                     }
                 }

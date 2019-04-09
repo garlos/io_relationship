@@ -42,7 +42,8 @@ public class CsvOperation {
         } catch (NumberFormatException e) {
             System.out.println("not a number");
         }
-        System.out.println("Note:<saveCSV>  \"DataSet.csv\" file is saved");
+        System.out.format("        # CSV file is saved in " + "%s" +"\\%s \n",System.getProperty("user.dir"),filePath);
+
     }
 
 

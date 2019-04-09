@@ -50,8 +50,8 @@ public class NetPayCalc {
 
         TestCase testSuite = new TestCase();
 
-        testSuite.setSalary(Math.toIntExact(grossPay));
-        testSuite.setExReward(exReward);
+        testSuite.set_out_Salary(Math.toIntExact(grossPay));
+        testSuite.set_out_ExReward(exReward);
 
         return testSuite;
     }

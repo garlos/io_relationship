@@ -3,12 +3,14 @@ package SUT;
 public class TestCase {
 
     private int testId;
-    private int staffType;
-    private int workHour;
-    private int quality;
-    private int age;
-    private int salary;
-    private boolean exReward;
+
+    private int _inp_StaffType;
+    private int _inp_WorkHour;
+    private int _inp_Quality;
+    private int _inp_Age;
+
+    private int _out_Salary;
+    private boolean _out_ExReward;
 
 
     public int getTestId() {
@@ -19,51 +21,51 @@ public class TestCase {
         this.testId = testId;
     }
 
-    public int getStaffType() {
-        return staffType;
+    public int get_inp_StaffType() {
+        return _inp_StaffType;
     }
 
-    public void setStaffType(int staffType) {
-        this.staffType = staffType;
+    public void set_inp_StaffType(int _inp_StaffType) {
+        this._inp_StaffType = _inp_StaffType;
     }
 
-    public int getWorkHour() {
-        return workHour;
+    public int get_inp_WorkHour() {
+        return _inp_WorkHour;
     }
 
-    public void setWorkHour(int workHour) {
-        this.workHour = workHour;
+    public void set_inp_WorkHour(int _inp_WorkHour) {
+        this._inp_WorkHour = _inp_WorkHour;
     }
 
-    public int getQuality() {
-        return quality;
+    public int get_inp_Quality() {
+        return _inp_Quality;
     }
 
-    public void setQuality(int quality) {
-        this.quality = quality;
+    public void set_inp_Quality(int _inp_Quality) {
+        this._inp_Quality = _inp_Quality;
     }
 
-    public int getAge() {
-        return age;
+    public int get_inp_Age() {
+        return _inp_Age;
     }
 
-    public void setAge(int age) {
-        this.age = age;
+    public void set_inp_Age(int _inp_Age) {
+        this._inp_Age = _inp_Age;
     }
 
-    public int getSalary() {
-        return salary;
+    public int get_out_Salary() {
+        return _out_Salary;
     }
 
-    public void setSalary(int salary) {
-        this.salary = salary;
+    public void set_out_Salary(int _out_Salary) {
+        this._out_Salary = _out_Salary;
     }
 
-    public boolean getExReward() {
-        return exReward;
+    public boolean is_out_ExReward() {
+        return _out_ExReward;
     }
 
-    public void setExReward(boolean exReward) {
-        this.exReward = exReward;
+    public void set_out_ExReward(boolean _out_ExReward) {
+        this._out_ExReward = _out_ExReward;
     }
 }
