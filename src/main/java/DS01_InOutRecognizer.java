@@ -1,19 +1,23 @@
+import SUT.TestCase;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DS01_InOutRecognizer {
 
-    public static List<ArrayList<Integer>> inOutRecognizer(String[] fields) {
+    public static List<ArrayList<Integer>> recognizeInOutFields(TestCase testCase) {
+
+        List<Field> fields = Utils.ReflectionUtils.getAllFields(testCase.getClass());
 
         ArrayList<Integer> inputIndexes = new ArrayList<>();
         ArrayList<Integer> outputIndexes = new ArrayList<>();
+
         List<ArrayList<Integer>> fieldsIndex = new ArrayList<>();
 
-        for (int i = 0; i < fields.length; i++) {
-
-            if (fields[i].toLowerCase().startsWith("get_in_")) {
+        for (int i = 0; i < fields.size(); i++) {
+            if (fields.get(i).getName().toLowerCase().startsWith("_inp_")) {
                 inputIndexes.add(i);
-            } else if (fields[i].toLowerCase().startsWith("get_out_")) {
+            } else if (fields.get(i).getName().toLowerCase().startsWith("_out_")) {
                 outputIndexes.add(i);
             }
         }

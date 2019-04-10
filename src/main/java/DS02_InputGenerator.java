@@ -9,9 +9,9 @@ public class DS02_InputGenerator {
 
     private static ArrayList<TestCase> testSuitesArr = new ArrayList<>();
 
-    public static ArrayList<TestCase> setInputData() {
+    public static ArrayList<TestCase> generateInputs() {
         Integer count = 1;
-        //generate sequential inputs
+        //generateDataSet sequential inputs
         for (int i = 1; i < 4; i++) {
             for (int j = 1; j < 51; j++) {
                 for (int w = 1; w < 21; w++) {

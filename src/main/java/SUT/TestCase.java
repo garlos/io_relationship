@@ -9,6 +9,7 @@ public class TestCase {
     private int _inp_Quality;
     private int _inp_Age;
 
+
     private int _out_Salary;
     private boolean _out_ExReward;
 

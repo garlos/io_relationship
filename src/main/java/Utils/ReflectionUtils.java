@@ -138,7 +138,7 @@ public class ReflectionUtils {
     public static ArrayList<String> getAllFieldsStringValue(Object instance) {
 
         List<Field> fields = ReflectionUtils.getAllFields(instance.getClass());
-        ArrayList<String> value = new ArrayList<>(fields.size());
+        ArrayList<String> value = new ArrayList<>();
 
         for (Field field : fields) {
             field.setAccessible(true);

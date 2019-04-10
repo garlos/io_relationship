@@ -48,11 +48,11 @@ public class NetPayCalc {
             exReward = false;
         }
 
-        TestCase testSuite = new TestCase();
+        TestCase testCase = new TestCase();
 
-        testSuite.set_out_Salary(Math.toIntExact(grossPay));
-        testSuite.set_out_ExReward(exReward);
+        testCase.set_out_Salary(Math.toIntExact(grossPay));
+        testCase.set_out_ExReward(exReward);
 
-        return testSuite;
+        return testCase;
     }
 }

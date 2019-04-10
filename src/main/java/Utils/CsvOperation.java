@@ -4,6 +4,7 @@ import java.io.*;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
+
 import SUT.TestCase;
 
 public class CsvOperation {
@@ -42,7 +43,7 @@ public class CsvOperation {
         } catch (NumberFormatException e) {
             System.out.println("not a number");
         }
-        System.out.format("        # CSV file is saved in " + "%s" +"\\%s \n",System.getProperty("user.dir"),filePath);
+        System.out.format("        # DataSet CSV file is saved in %s \n", Utils.Config.filePath());
 
     }
 
@@ -60,7 +61,6 @@ public class CsvOperation {
                 for (int i = 0; i < fields.size(); i++) {
                     ReflectionUtils.setField(fields.get(i), testCase, values[i]);
                 }
-                System.out.println(testCase.getTestId());
                 testSuitesArr.add(testCase);
             }
 

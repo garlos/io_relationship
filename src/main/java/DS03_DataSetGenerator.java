@@ -7,10 +7,9 @@ import java.util.ArrayList;
 public class DS03_DataSetGenerator {
 
 
-    public static void generate(ArrayList<TestCase> dSet) throws IOException {
+    public static ArrayList<TestCase> generateDataSet(ArrayList<TestCase> dSet) throws IOException {
 
         String csvHeaders = CsvOperation.csvHeadersGenerator();
-        String filePath = "DataSet.csv";
         SUT.NetPayCalc netPayC = new SUT.NetPayCalc();
 
         for (int i = 0; i < dSet.size(); i++) {
@@ -34,7 +33,7 @@ public class DS03_DataSetGenerator {
         }
 
 
-        CsvOperation.saveCSV(dSet, filePath, csvHeaders);
-
+        CsvOperation.saveCSV(dSet, Utils.Config.filePath(), csvHeaders);
+        return dSet;
     }
 }

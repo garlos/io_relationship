@@ -10,31 +10,7 @@ package SUT;//inputs:
 public class GrossPay {
 
     public static void main(String[] args) {
-        Double grossPay;
-        Double netPay;
-        int personCount = 100;
-        Double[][] dataSet = new Double[personCount][5];
-//        SUT.NetPayCalc netPaymentCalc = new SUT.NetPayCalc();
 
 
-
-//        dataSet = SetDataSet.setData(personCount, dataSet);  // set DataSet for all personCount
-//
-//        for (int i = 0; i < personCount; i++) {
-//            System.out.println("No." + (i + 1));
-//            System.out.println("staff type: " + dataSet[i][0]);
-//            System.out.println("work hours: " + dataSet[i][1]);
-//            System.out.println("ex-hours  : " + dataSet[i][2]);
-//            System.out.println("Quality   : " + dataSet[i][3]);
-//
-//            netPay = netPaymentCalc.netPayCalc(dataSet[i][0], dataSet[i][1], dataSet[i][2], dataSet[i][3]);
-//            System.out.println("---------");
-//            netPay = Math.round((netPay * 100) / 100.0);
-//            System.out.println("Net Pay  : " + netPay);
-//
-//            dataSet[i][4] = grossPay;       //saveCSV output in index 4 of dataset
-//            System.out.println("Gross Pay: " + grossPay);
-//            System.out.println("==========================");
-//        }
     }
 }
