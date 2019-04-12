@@ -1,8 +1,8 @@
 import SUT.TestCase;
 import org.junit.Test;
+
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class tempRunner {
 
@@ -20,7 +20,8 @@ public class tempRunner {
 //        System.out.println(inOutFieldsIndex.get(1));
 
 
-        List<ArrayList<Integer>> norelfields = RF01_IORelationFinder.check_IO_Relations(testCase, inOutFieldsIndex, dataSet);
-        System.out.println(norelfields);
+        Map<Integer, Integer> noRelfields = RF01_IORelationFinder.check_IO_Relations(testCase, inOutFieldsIndex, dataSet);
+        System.out.println(Collections.singletonList(noRelfields));
+
     }
 }
