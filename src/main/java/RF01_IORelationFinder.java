@@ -32,7 +32,7 @@ public class RF01_IORelationFinder {
 
                 }
 
-                System.out.format("        # relation status: \"%-10s\" --> \"%s\" -> ",
+                System.out.format("        _*** relation status: \"%-10s\" --> \"%s\" -> ",
                         fields.get(inOutFieldsIndex.get(0).get(inp_index)).getName(),
                         fields.get(inOutFieldsIndex.get(1).get(out_index)).getName());
 
@@ -56,25 +56,24 @@ public class RF01_IORelationFinder {
 
     public static boolean isRelation(ArrayList<Object> inputColumn, ArrayList<Object> outputColumn, Integer dataSetSize) {
 
-        Object inputCompare = inputColumn.get(0);
-        Integer affectedOutputs = 0;
+        Object outputCompare = outputColumn.get(0);
+        Integer effectiveInputs = 0;
 
 
-        for (int i = 0; i < dataSetSize; i++) {
+        for (int i = 1; i < dataSetSize; i++) {
 
-            if (!inputCompare.equals(inputColumn.get(i))) {
+            if (!outputCompare.equals(outputColumn.get(i))) {
 
-                if (!outputColumn.get(i).equals(outputColumn.get(i - 1))) {
+                if (!inputColumn.get(i).equals(inputColumn.get(i - 1))) {
 
-                    inputCompare = inputColumn.get(i);
-                    affectedOutputs++;
+                    outputCompare = outputColumn.get(i);
+                    effectiveInputs++;
                 }
             }
         }
-        System.out.print(affectedOutputs + " - ");
-        return affectedOutputs != 0;
+        System.out.print(effectiveInputs + " - ");
+        return effectiveInputs != 0;
     }
-
 
 }
 

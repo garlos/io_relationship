@@ -40,8 +40,13 @@ public class Config {
         return configFile;
     }
 
-    public static String filePath() {
-        return (System.getProperty("user.dir") + "\\" + "DataSet.csv");
-    }
+    public static String filePath(int file) {
 
+        if (file == 0) {
+            return (System.getProperty("user.dir") + "\\" + "DataSet.csv");
+        } else
+            return (System.getProperty("user.dir") + "\\" + "ReducedDataSet.csv");
+    }
 }
+
+

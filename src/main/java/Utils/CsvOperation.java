@@ -13,10 +13,10 @@ public class CsvOperation {
     private static String csvFields;
 
 
-    public static void saveCSV(ArrayList<TestCase> dSet, String filePath, String csvHeaders) throws IOException {
+    public static void saveCSV(ArrayList<TestCase> dSet, int fileType, String csvHeaders) throws IOException {
 
 
-        File file = new File(filePath);
+        File file = new File(Utils.Config.filePath(fileType));
 
         if (file.exists()) {
             file.delete();
@@ -43,7 +43,7 @@ public class CsvOperation {
         } catch (NumberFormatException e) {
             System.out.println("not a number");
         }
-        System.out.format("        # DataSet CSV file is saved in %s \n", Utils.Config.filePath());
+        System.out.format("        # DataSet CSV file is saved in %s \n", Utils.Config.filePath(fileType));
 
     }
 
@@ -85,13 +85,13 @@ public class CsvOperation {
     }
 
 
-    public static String csvHeadersGenerator() {
+    public static String csvHeadersGenerator(Class target) {
 
         StringBuilder headers = new StringBuilder();
 
-        List<Field> fields = ReflectionUtils.getAllFields(TestCase.class);
-        for (int i = 0; i < fields.size(); i++) {
-            headers.append(fields.get(i).getName() + ",");
+        List<Field> fields = ReflectionUtils.getAllFields(target);
+        for (Field field : fields) {
+            headers.append(field.getName()).append(",");
         }
         return headers.toString();
     }

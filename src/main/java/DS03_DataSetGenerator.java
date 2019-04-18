@@ -9,7 +9,7 @@ public class DS03_DataSetGenerator {
 
     public static ArrayList<TestCase> generateDataSet(ArrayList<TestCase> dSet) throws IOException {
 
-        String csvHeaders = CsvOperation.csvHeadersGenerator();
+        String csvHeaders = CsvOperation.csvHeadersGenerator(TestCase.class);
         SUT.NetPayCalc netPayC = new SUT.NetPayCalc();
 
         for (int i = 0; i < dSet.size(); i++) {
@@ -33,7 +33,7 @@ public class DS03_DataSetGenerator {
         }
 
 
-        CsvOperation.saveCSV(dSet, Utils.Config.filePath(), csvHeaders);
+        CsvOperation.saveCSV(dSet,0, csvHeaders);
         return dSet;
     }
 }
