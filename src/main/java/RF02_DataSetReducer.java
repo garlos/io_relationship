@@ -1,6 +1,7 @@
 import SUT.TestCase;
 import Utils.CsvOperation;
 import Utils.ReflectionUtils;
+import com.rits.cloning.Cloner;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
@@ -15,110 +16,90 @@ public class RF02_DataSetReducer {
             throws IllegalAccessException, IOException {
 
 
-//        Set<TestCase> bigSet = new HashSet<>(dataSet);
+        ArrayList<Integer> finalTestIdList = new ArrayList<>();
 
-//        for (Map.Entry<Integer, Integer> entry : noRelfields.entrySet()) {
+        for (Map.Entry<Integer, Integer> entry : noRelfields.entrySet()) {
 
-//            System.out.println(entry.getKey());
+            ArrayList<TestCase> tempDataSet;
+            Cloner cloner = new Cloner();
+            tempDataSet = cloner.deepClone(dataSet);
 
+            tempDataSet = setConstantValuesToNoRelInputColumn(tempDataSet, entry.getKey());
+            ArrayList<Integer> remainedTestIds = removeDuplicatedTestInputs(tempDataSet, inOutFieldsIndex);
 
-        setConstantValuesToNoRelInputColumn(dataSet, 1);
-        removeDuplicates(dataSet, inOutFieldsIndex);
-//        CsvOperation.saveCSV(dataSet, 1, CsvOperation.csvHeadersGenerator(TestCase.class));
+            for (Integer remainedTestId : remainedTestIds) {
 
+                if (!finalTestIdList.contains(remainedTestId)) {
 
-//            bigSet.retainAll(hashSet);
-//        }
+                    finalTestIdList.add(remainedTestId);
+                    System.out.println("remained testId: " + remainedTestId);
 
-//        System.out.println("size: " + hashSet.size());
+                }
+            }
 
+            tempDataSet.clear();
+        }
 
-//        for (Map.Entry<Integer, Integer> entry : noRelfields.entrySet()) {
-//            for (TestCase val : bigSet) {
-//                System.out.println(val.);
-//            }
-//        }
-
-
+        System.out.println("final list size: " + finalTestIdList.size());
+        retrievedRemainedTestSuitesDataSet(dataSet, finalTestIdList);
+        CsvOperation.saveDataSetToCSV(dataSet, 1, CsvOperation.csvHeadersGenerator(TestCase.class));
     }
 
-    public static void removeDuplicates(ArrayList<TestCase> dataSet,
-                                        List<ArrayList<Integer>> inOutFieldsIndex)
-            throws IllegalAccessException {
+    public static ArrayList<Integer> removeDuplicatedTestInputs(ArrayList<TestCase> dataSet,
+                                                                List<ArrayList<Integer>> inOutFieldsIndex) {
 
-
-        TestCase testCase = new TestCase();
-
-        ArrayList<String> AllFieldsStringValue = new ArrayList<>();
-        ArrayList<ArrayList<String>> allInputFieldsString = new ArrayList<>();
+        ArrayList<String> AllFieldsStringValue;
         ArrayList<String> newList = new ArrayList<>();
-        String element = "";
+        ArrayList<Integer> remainedTestId = new ArrayList<>();
 
         for (int i = 0; i < dataSet.size(); i++) {
 
             StringBuilder inputValues = new StringBuilder();
             AllFieldsStringValue = ReflectionUtils.getAllFieldsStringValue(dataSet.get(i));
 
+
             for (int j = 0; j < inOutFieldsIndex.get(0).size(); j++) {
 
                 inputValues.append(AllFieldsStringValue.get(inOutFieldsIndex.get(0).get(j))).append(",");
-
-
             }
+
             if (!newList.contains(inputValues.toString())) {
 
                 newList.add(inputValues.toString());
-                System.out.println("No. " + i + " - added:" + inputValues);
-
+                remainedTestId.add(dataSet.get(i).getTestId());
             }
-//            System.out.println();
         }
 
-//        for (int i = 0; i < dataSet.size(); i++) {
-//            System.out.format("%s\n", newList.get(i));
-//
-//        }
-
-//        }
-
-
-//                // Create a new ArrayList
-//                ArrayList<TestCase> newList = new ArrayList<>();
-//
-//                // Traverse through the first list
-//                for (TestCase element : dataSet) {
-//
-//                    // If this element is not present in newList
-//                    // then add it
-//                    if (!newList.contains(element)) {
-//
-//                        newList.add(element);
-//                    }
-//                }
-//
-//                // return the new list
-//                return newList;
-
+        System.out.println("new list size: " + newList.size());
+        return remainedTestId;
     }
 
-    public static void setConstantValuesToNoRelInputColumn(ArrayList<TestCase> dataSet,
-                                                           int noRelInputColumn) throws IllegalAccessException, IOException {
+    public static ArrayList<TestCase> setConstantValuesToNoRelInputColumn(ArrayList<TestCase> dataSet,
+                                                                          int noRelInputColumn)
+            throws IllegalAccessException {
 
         TestCase testCase = new TestCase();
 
         List<Field> fields = Utils.ReflectionUtils.getAllFields(testCase.getClass());
         Object firstRecordValues = ReflectionUtils.getField(dataSet.get(0), fields.get(noRelInputColumn));
-//        System.out.println(firstRecordValues);
 
-        int i = 0;
         for (TestCase tCase : dataSet) {
 
             ReflectionUtils.setField(fields.get(noRelInputColumn), tCase, firstRecordValues);
-            System.out.println("No. : " + (i++) + " " + tCase.get_inp_StaffType() + " " + tCase.get_inp_WorkHour() + " " + tCase.get_inp_Quality());
         }
 
-//        CsvOperation.saveCSV(list, 1, CsvOperation.csvHeadersGenerator());
+        return dataSet;
+    }
 
+    public static void retrievedRemainedTestSuitesDataSet(ArrayList<TestCase> dataSet, ArrayList<Integer> remainedTestIds) {
+
+
+        for (int i = 0; i < dataSet.size(); i++) {
+
+            if (!remainedTestIds.contains(dataSet.get(i).getTestId())) {
+                dataSet.remove(dataSet.get(i).getTestId());
+            }
+        }
     }
 }
 

@@ -13,7 +13,7 @@ public class CsvOperation {
     private static String csvFields;
 
 
-    public static void saveCSV(ArrayList<TestCase> dSet, int fileType, String csvHeaders) throws IOException {
+    public static void saveDataSetToCSV(ArrayList<TestCase> dSet, int fileType, String csvHeaders) throws IOException {
 
 
         File file = new File(Utils.Config.filePath(fileType));
