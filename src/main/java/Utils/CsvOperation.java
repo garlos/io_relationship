@@ -43,7 +43,7 @@ public class CsvOperation {
         } catch (NumberFormatException e) {
             System.out.println("not a number");
         }
-        System.out.format("        # DataSet CSV file is saved in %s \n", Utils.Config.filePath(fileType));
+        System.out.format("        # data set CSV file is saved in %s \n", Utils.Config.filePath(fileType));
 
     }
 

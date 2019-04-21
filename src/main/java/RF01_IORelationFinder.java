@@ -10,8 +10,8 @@ public class RF01_IORelationFinder {
     public static Map<Integer, Integer> check_IO_Relations(TestCase testCase,
                                                                  List<ArrayList<Integer>> inOutFieldsIndex,
                                                                  ArrayList<TestCase> dataSet) throws IllegalAccessException {
-
-        System.out.println("        # extracting input and output data columns is started");
+        System.out.format("        # I/O relations are identifying... \n");
+        System.out.format("        # input and output data columns is extracting... \n\n");
 
         List<Field> fields = Utils.ReflectionUtils.getAllFields(testCase.getClass());
 
@@ -32,7 +32,7 @@ public class RF01_IORelationFinder {
 
                 }
 
-                System.out.format("        _*** relation status: \"%-10s\" --> \"%s\" -> ",
+                System.out.format("        _* relation status: \"%-10s\" --> \"%s\" -> ",
                         fields.get(inOutFieldsIndex.get(0).get(inp_index)).getName(),
                         fields.get(inOutFieldsIndex.get(1).get(out_index)).getName());
 
@@ -51,6 +51,7 @@ public class RF01_IORelationFinder {
 
         }
 
+        System.out.format("\n        # I/O relations identified. \n");
         return allNoRelFields;
     }
 

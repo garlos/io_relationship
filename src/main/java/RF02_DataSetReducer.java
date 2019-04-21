@@ -2,6 +2,7 @@ import SUT.TestCase;
 import Utils.CsvOperation;
 import Utils.ReflectionUtils;
 import com.rits.cloning.Cloner;
+
 import java.io.IOException;
 import java.lang.reflect.Field;
 import java.util.*;
@@ -12,14 +13,20 @@ public class RF02_DataSetReducer {
     public static void redundantTestCaseReducer(ArrayList<TestCase> dataSet,
                                                 Map<Integer, Integer> noRelfields,
                                                 List<ArrayList<Integer>> inOutFieldsIndex)
-            throws IllegalAccessException, IOException {
+            throws IllegalAccessException, IOException, IllegalArgumentException {
+
+        System.out.format("        # redundant test suites are reducing... \n");
+
 
         ArrayList<Integer> finalTestIdList = new ArrayList<>();
 
+        System.out.format("        # constant values are updating in fields column's with no relation to output \n");
         for (Map.Entry<Integer, Integer> entry : noRelfields.entrySet()) {
 
             ArrayList<TestCase> tempDataSet;
+
             Cloner cloner = new Cloner();
+
             tempDataSet = cloner.deepClone(dataSet);
 
             tempDataSet = setConstantValuesToNoRelInputColumn(tempDataSet, entry.getKey());
@@ -30,7 +37,7 @@ public class RF02_DataSetReducer {
                 if (!finalTestIdList.contains(remainedTestId)) {
 
                     finalTestIdList.add(remainedTestId);
-                    System.out.println("Remained Test Id: " + remainedTestId);
+//                    System.out.println("Remained Test Id: " + remainedTestId);
 
                 }
             }
@@ -38,13 +45,16 @@ public class RF02_DataSetReducer {
             tempDataSet.clear();
         }
 
-        System.out.println("Size of Final Test Suites List: " + finalTestIdList.size());
+
+        System.out.format("        # number of union of all test suites: %d \n", finalTestIdList.size());
 
         retrievedRemainedTestSuitesDataSet(dataSet, finalTestIdList);
 
-        System.out.println("Size of Final DataSet: " + dataSet.size());
+        System.out.format("        # number of final reduced data set test suites: %d \n", dataSet.size());
 
+        System.out.format("        # reduced data set is saving in CSV file \n");
         CsvOperation.saveDataSetToCSV(dataSet, 1, CsvOperation.csvHeadersGenerator(TestCase.class));
+
     }
 
     public static ArrayList<Integer> removeDuplicatedTestInputs(ArrayList<TestCase> dataSet,
@@ -72,13 +82,14 @@ public class RF02_DataSetReducer {
             }
         }
 
-        System.out.println("Size of Remained Test Suites: " + newList.size());
+        System.out.format("        # number of remained test suites (no duplicated): %d \n", newList.size());
         return remainedTestId;
     }
 
     public static ArrayList<TestCase> setConstantValuesToNoRelInputColumn(ArrayList<TestCase> dataSet,
                                                                           int noRelInputColumn)
             throws IllegalAccessException {
+
 
         TestCase testCase = new TestCase();
         List<Field> fields = Utils.ReflectionUtils.getAllFields(testCase.getClass());
@@ -103,7 +114,7 @@ public class RF02_DataSetReducer {
         }
 
         redundantTestSuites.removeAll(remainedTestIds);
-        System.out.println("Size of Redundant Test Suites: " + redundantTestSuites.size());
+        System.out.format("        # number of redundant test suites: %d \n", redundantTestSuites.size());
         int i = 0;
 
         while (i < dataSet.size()) {

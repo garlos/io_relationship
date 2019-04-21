@@ -7,6 +7,8 @@ public class DS01_InOutRecognizer {
 
     public static List<ArrayList<Integer>> recognizeInOutFields(TestCase testCase) {
 
+        System.out.format("        # the SUT's TestCase.java (POJO) inputs and outputs are recognizing... \n\n");
+
         List<Field> fields = Utils.ReflectionUtils.getAllFields(testCase.getClass());
 
         ArrayList<Integer> inputIndexes = new ArrayList<>();

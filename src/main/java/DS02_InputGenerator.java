@@ -10,6 +10,8 @@ public class DS02_InputGenerator {
     private static ArrayList<TestCase> testSuitesArr = new ArrayList<>();
 
     public static ArrayList<TestCase> generateInputs() {
+
+        System.out.format("        # input data are combining... \n");
         Integer count = 1;
         //generateDataSet sequential inputs
         for (int i = 1; i < 4; i++) {
@@ -27,6 +29,8 @@ public class DS02_InputGenerator {
                 }
             }
         }
+
+        System.out.println("        # a set of test suites generated. \n");
         return testSuitesArr;
     }
 }

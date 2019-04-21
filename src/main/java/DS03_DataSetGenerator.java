@@ -9,6 +9,9 @@ public class DS03_DataSetGenerator {
 
     public static ArrayList<TestCase> generateDataSet(ArrayList<TestCase> dSet) throws IOException {
 
+        System.out.format("        # data set is generating... \n");
+        System.out.format("        # test suites are injecting to SUT... \n");
+
         String csvHeaders = CsvOperation.csvHeadersGenerator(TestCase.class);
         SUT.NetPayCalc netPayC = new SUT.NetPayCalc();
 
@@ -32,8 +35,8 @@ public class DS03_DataSetGenerator {
 //                    dSet.get(i).getExReward());
         }
 
-
         CsvOperation.saveDataSetToCSV(dSet,0, csvHeaders);
+        System.out.format("        # data set generated. \n");
         return dSet;
     }
 }
