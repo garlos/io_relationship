@@ -9,6 +9,11 @@ import java.util.*;
 
 public class RF02_DataSetReducer {
 
+    public static void disableWarning() {
+        System.err.close();
+        System.setErr(System.out);
+    }
+
 
     public static void redundantTestCaseReducer(ArrayList<TestCase> dataSet,
                                                 Map<Integer, Integer> noRelfields,
@@ -20,13 +25,12 @@ public class RF02_DataSetReducer {
 
         ArrayList<Integer> finalTestIdList = new ArrayList<>();
 
-        System.out.format("        # constant values are updating in fields column's with no relation to output \n");
+        System.out.format("        # constant values are updating in fields column's with no relation to output... \n");
         for (Map.Entry<Integer, Integer> entry : noRelfields.entrySet()) {
 
             ArrayList<TestCase> tempDataSet;
 
             Cloner cloner = new Cloner();
-
             tempDataSet = cloner.deepClone(dataSet);
 
             tempDataSet = setConstantValuesToNoRelInputColumn(tempDataSet, entry.getKey());
@@ -52,9 +56,8 @@ public class RF02_DataSetReducer {
 
         System.out.format("        # number of final reduced data set test suites: %d \n", dataSet.size());
 
-        System.out.format("        # reduced data set is saving in CSV file \n");
         CsvOperation.saveDataSetToCSV(dataSet, 1, CsvOperation.csvHeadersGenerator(TestCase.class));
-
+        System.out.format("        # reduced data set generated. \n");
     }
 
     public static ArrayList<Integer> removeDuplicatedTestInputs(ArrayList<TestCase> dataSet,

@@ -30,7 +30,7 @@ public class DS02_InputGenerator {
             }
         }
 
-        System.out.println("        # a set of test suites generated. \n");
+        System.out.println("        # a set of test suites generated. ");
         return testSuitesArr;
     }
 }
