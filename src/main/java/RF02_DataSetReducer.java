@@ -9,10 +9,6 @@ import java.util.*;
 
 public class RF02_DataSetReducer {
 
-    public static void disableWarning() {
-        System.err.close();
-        System.setErr(System.out);
-    }
 
 
     public static void redundantTestCaseReducer(ArrayList<TestCase> dataSet,
