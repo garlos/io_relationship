@@ -87,7 +87,6 @@ public class RF02_DataSetReducer {
                                                                           int noRelInputColumn)
             throws IllegalAccessException {
 
-
         TestCase testCase = new TestCase();
         List<Field> fields = Utils.ReflectionUtils.getAllFields(testCase.getClass());
         Object firstRecordValues = ReflectionUtils.getField(dataSet.get(0), fields.get(noRelInputColumn));
@@ -118,7 +117,6 @@ public class RF02_DataSetReducer {
                 dataSet.remove(i--);
             i++;
         }
-
     }
 }
 

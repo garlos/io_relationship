@@ -46,9 +46,7 @@ public class RF01_IORelationFinder {
 
                 inputColumn.clear();
                 outputColumn.clear();
-
             }
-
         }
 
         System.out.format("\n        # I/O relations identified. \n");
@@ -59,7 +57,6 @@ public class RF01_IORelationFinder {
 
         Object outputCompare = outputColumn.get(0);
         Integer effectiveInputs = 0;
-
 
         for (int i = 1; i < dataSetSize; i++) {
 
@@ -75,6 +72,5 @@ public class RF01_IORelationFinder {
         System.out.print(effectiveInputs + " - ");
         return effectiveInputs != 0;
     }
-
 }
 
