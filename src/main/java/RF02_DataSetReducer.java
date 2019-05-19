@@ -10,14 +10,12 @@ import java.util.*;
 public class RF02_DataSetReducer {
 
 
-
     public static void redundantTestCaseReducer(ArrayList<TestCase> dataSet,
                                                 Map<Integer, Integer> noRelfields,
                                                 List<ArrayList<Integer>> inOutFieldsIndex)
             throws IllegalAccessException, IOException, IllegalArgumentException {
 
         System.out.format("        # redundant test suites are reducing... \n");
-
 
         ArrayList<Integer> finalTestIdList = new ArrayList<>();
 
@@ -97,7 +95,6 @@ public class RF02_DataSetReducer {
         for (TestCase tCase : dataSet) {
 
             ReflectionUtils.setField(fields.get(noRelInputColumn), tCase, firstRecordValues);
-
         }
 
         return dataSet;
